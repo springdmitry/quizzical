@@ -11,15 +11,15 @@ function App() {
   const [isCheckAnswers, setIsCheckAnswers] = useState(false)
   const [countAnswers, setCountAnswers] = useState(0)
   const [answersIdArr, setAnswersIdArr] = useState([])
-  const [category, setCategory] = useState("")
+  const [category, setCategory] = useState("https://opentdb.com/api.php?amount=5")
 
 
   useEffect(() => {
-    let quizArr = []
-    isStart && fetch(`https://opentdb.com/api.php?amount=5${category}`)
+    let quizArr
+    isStart && fetch(category)
       .then(res => res.json())
       .then(data => {
-        quizArr = data.results.map(item => {
+          quizArr = data.results.map(item => {
           return {
             question: item.question,
             correctAnswer: item.correct_answer,
@@ -35,7 +35,7 @@ function App() {
   }, [isStart])
 
   function selectCategory(e) {
-    const selectedCategory = e.target.value.length > 0 ? `&category${e.target.value}` : ''
+    const selectedCategory = e.target.value.length > 0 ? `https://opentdb.com/api.php?amount=5&category=${e.target.value}` : 'https://opentdb.com/api.php?amount=5'
     setCategory(selectedCategory)
   }
 
@@ -63,19 +63,17 @@ function App() {
     setCountAnswers(answersIdArr.length)
   }
 
-
   const quizElements = quiz.map((item, index) => (
-    <QuizElement
-      id={index}
-      key={index}
-      question={item.question}
-      correctAnswer={item.correctAnswer}
-      incorrectAnswer={item.incorrectAnswer}
-      isCheckAnswers={isCheckAnswers}
-      scoreCount={scoreCount}
-    />
-  ))
-
+      <QuizElement
+        id={index}
+        key={index}
+        question={item.question}
+        correctAnswer={item.correctAnswer}
+        incorrectAnswer={item.incorrectAnswer}
+        isCheckAnswers={isCheckAnswers}
+        scoreCount={scoreCount}
+      />
+    ))
 
   return (
     <>

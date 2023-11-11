@@ -58,6 +58,11 @@
     background: #F8BCBC;
 }
 
+.answerBtn .correct {
+    background:  #94D7A2;
+    opacity: 1;
+}
+
 .line {
     background: #DBDEF0;
     height: 1px;
