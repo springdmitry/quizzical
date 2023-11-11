@@ -53,6 +53,10 @@ function App() {
     setIsNewGame(prevState => !prevState)
   }
 
+  useEffect(() => {
+    setCountAnswers(answersIdArr.length)
+  },[answersIdArr])
+    
   function scoreCount(e) {
     e.target.value === "true" && !answersIdArr.includes(e.target.id) &&
       setAnswersIdArr(prevArr => {
@@ -60,7 +64,6 @@ function App() {
         arr.push(e.target.id)
         return arr
       })
-    setCountAnswers(answersIdArr.length)
   }
 
   const quizElements = quiz.map((item, index) => (
