@@ -11,10 +11,13 @@ export default function FirstScreen({ startQuiz, selectCategory }) {
         <div className="first-screen">
             <h1>Quizzical</h1>
             <p>Select category from list below</p>
-            <select name="categories" onChange={(e)=>selectCategory(e)}>
-                <option value="" defaultValue>All categories</option>
-                {selectOptionsEl}
-            </select>
+            <div className='select-wrap'>
+                <select name="categories" onChange={(e)=>selectCategory(e)}>
+                    <option value="" defaultValue>All categories</option>
+                    {selectOptionsEl}
+                </select>
+                <span className="arrow">▼</span>
+            </div>
             <button onClick={startQuiz} className="btn start-btn">Start quiz</button>
         </div>
     )

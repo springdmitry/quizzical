@@ -4,6 +4,10 @@
     font-weight: 700;
 }
 
+.quiz-element {
+    padding: 0 15px;
+}
+
 .answers {
     display: flex;
     justify-content: start;
