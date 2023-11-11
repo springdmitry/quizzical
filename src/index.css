@@ -1,0 +1,22 @@
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: url("./assets/lemony.svg") top right no-repeat, url("./assets/baby-medium.svg") bottom left no-repeat, #F5F7FB;
+}
+
+.btn {
+  border: none;
+  border-radius: 15px;
+  background: #4D5B9E;
+  color: #F5F7FB;
+  font-family: 'Inter', sans-serif;
+  cursor: pointer;
+}
+
+.btn:active {
+  box-shadow: 0px 0px 2px  1px #4D5B9E;
+}
