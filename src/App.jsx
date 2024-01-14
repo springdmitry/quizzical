@@ -19,8 +19,6 @@ function App() {
     isStart && fetch(category)
       .then(res => res.json())
       .then(data => {
-        console.log("fetch runs!!!")
-        console.log(category)
         quizArr = data.results.map(item => {
           return {
             question: item.question,
