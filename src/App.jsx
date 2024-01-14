@@ -15,11 +15,13 @@ function App() {
 
 
   useEffect(() => {
-    let quizArr
+    let quizArr = []
     isStart && fetch(category)
       .then(res => res.json())
       .then(data => {
-          quizArr = data.results.map(item => {
+        console.log("fetch runs!!!")
+        console.log(category)
+        quizArr = data.results.map(item => {
           return {
             question: item.question,
             correctAnswer: item.correct_answer,
@@ -27,21 +29,23 @@ function App() {
           }
         })
         setQuiz(quizArr)
+        setCategory("https://opentdb.com/api.php?amount=5")
       })
+    !isStart && setQuiz([])
   }, [isStart])
 
   useEffect(() => {
     setAnswersIdArr([])
-  }, [isStart])
+  }, [category])
 
   function selectCategory(e) {
-    const selectedCategory = e.target.value.length > 0 ? `https://opentdb.com/api.php?amount=5&category=${e.target.value}` : 'https://opentdb.com/api.php?amount=5'
+    let selectedCategory = e.target.value.length > 0 ? `https://opentdb.com/api.php?amount=5&category=${e.target.value}` : 'https://opentdb.com/api.php?amount=5'
     setCategory(selectedCategory)
   }
 
 
   function startQuiz() {
-    setIsStart(prevState => !prevState)
+    setTimeout(setIsStart(prevState => !prevState), 2000)
   }
 
   function checkAnswers() {
