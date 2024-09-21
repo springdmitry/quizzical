@@ -76,7 +76,6 @@ function App() {
         return arr.filter(id => e.target.name != id)
       })
     }
-    console.log(answersIdArr)
   }
 
   const quizElements = quiz.map((item, index) => (
