@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import Answer from "./Answer"
+// decode used to correct rendering text
 import { decode } from 'html-entities'
 
 export default function QuizElement(props) {
@@ -9,6 +10,7 @@ export default function QuizElement(props) {
         let array = []
         array.push({ answer: props.correctAnswer, correct: true })
         props.incorrectAnswer.forEach(answer => array.push({ answer: answer, correct: false }))
+        // randomize buttons position
         array.sort(() => Math.random() - 0.5)
 
         setAnswersArr(array)

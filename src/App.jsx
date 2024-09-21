@@ -29,7 +29,7 @@ function App() {
         setQuiz(quizArr)
         setCategory("https://opentdb.com/api.php?amount=5")
       })
-    !isStart && setQuiz([])
+    return setQuiz([])
   }, [isStart])
 
   useEffect(() => {
@@ -43,7 +43,8 @@ function App() {
 
 
   function startQuiz() {
-    setTimeout(setIsStart(prevState => !prevState), 2000)
+    setIsStart(prevState => !prevState)
+    setAnswersIdArr([])
   }
 
   function checkAnswers() {
@@ -60,12 +61,22 @@ function App() {
   },[answersIdArr])
     
   function scoreCount(e) {
-    e.target.value === "true" && !answersIdArr.includes(e.target.id) &&
+    // add to answersIdArr only correct answers that not in array
+    if (e.target.value === "true" && !answersIdArr.includes(e.target.name)) {
       setAnswersIdArr(prevArr => {
         let arr = [...prevArr]
-        arr.push(e.target.id)
+        arr.push(e.target.name)
         return arr
       })
+    }
+    // remove right answer if user clik wrong answer after correct
+    if (e.target.value === "false" && answersIdArr.includes(e.target.name)) {
+      setAnswersIdArr(prevArr => {
+        let arr = [...prevArr]
+        arr.pop()
+        return arr
+      })
+    }
   }
 
   const quizElements = quiz.map((item, index) => (
@@ -78,12 +89,12 @@ function App() {
         isCheckAnswers={isCheckAnswers}
         scoreCount={scoreCount}
       />
-    ))
-
-  return (
+  ))
+  
+ return (
     <>
       {!isStart && <FirstScreen startQuiz={startQuiz} selectCategory={selectCategory} />}
-      {isStart && quizElements}
+      {isStart && quizElements.length >  0 && quizElements}
       {isStart && !isNewGame && <button className="btn quiz-btn" onClick={() => checkAnswers()} >Check answer</button>}
       {isNewGame &&
         <div className='score-el'>
