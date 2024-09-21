@@ -73,10 +73,10 @@ function App() {
     if (e.target.value === "false" && answersIdArr.includes(e.target.name)) {
       setAnswersIdArr(prevArr => {
         let arr = [...prevArr]
-        arr.pop()
-        return arr
+        return arr.filter(id => e.target.name != id)
       })
     }
+    console.log(answersIdArr)
   }
 
   const quizElements = quiz.map((item, index) => (
